@@ -8,6 +8,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { Analytics } from "@vercel/analytics/react";
 import { Lato } from "next/font/google";
 import { ReactNode, Suspense } from "react";
+import { SkipLink } from "@/components/skip-link";
 
 const lato = Lato({
   weight: ["400", "700", "900"],
@@ -41,17 +42,21 @@ export default async function RootLayout({
             }
           >
             <LanguageProvider>
-              <div
-                className={`relative min-h-screen bg-background-light-600 dark:bg-background-dark-600 flex flex-col justify-center`}
+              <SkipLink href="#main-content">Skip to main content</SkipLink>
+              <main
+                id="main-content"
+                className={`relative min-h-screen bg-background-light-600 dark:bg-background-dark-600 flex flex-col justify-center p-4`}
               >
-                <div className="relative mx-auto max-w-[440px] py-8 w-full ">
-                  {children}
+                <div className="relative mx-auto w-full max-w-[440px] sm:max-w-[480px] md:max-w-[560px] py-8">
+                  <div className="bg-background-light-400 dark:bg-background-dark-500 rounded-lg shadow-sm p-6 sm:p-8">
+                    {children}
+                  </div>
                   <div className="flex flex-row justify-end py-4 items-center space-x-4">
                     <LanguageSwitcher />
                     <Theme />
                   </div>
                 </div>
-              </div>
+              </main>
             </LanguageProvider>
           </Suspense>
         </ThemeProvider>

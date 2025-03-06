@@ -84,7 +84,7 @@ export async function createNewSessionFromIdpIntent(
   }
 
   // Notify about the IDP-based registration
-  const { notifyUserRegistration } = await import('./notification');
+  const { notifyUserRegistration } = await import('./notifyWebhook');
   await notifyUserRegistration({
     userId: command.userId,
     email: userResponse.user.details?.emailAddress || '',

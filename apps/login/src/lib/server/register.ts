@@ -51,7 +51,7 @@ export async function registerUser(command: RegisterUserCommand) {
   }
 
   // Notify about the new user registration
-  const { notifyUserRegistration } = await import('./notification');
+  const { notifyUserRegistration } = await import('./notifyWebhook');
   await notifyUserRegistration({
     userId: addResponse.userId,
     email: command.email,

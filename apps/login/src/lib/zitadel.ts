@@ -1,6 +1,5 @@
 import { Client, create, Duration } from "@zitadel/client";
 import { makeReqCtx } from "@zitadel/client/v2";
-import { DeleteUserRequest, UpdateUserRequest } from "@zitadel/proto/zitadel/user/v2/user_service_pb";
 import { IdentityProviderService } from "@zitadel/proto/zitadel/idp/v2/idp_service_pb";
 import { TextQueryMethod } from "@zitadel/proto/zitadel/object/v2/object_pb";
 import {
@@ -1097,34 +1096,6 @@ export async function addIDPLink({
   );
 }
 
-export async function deleteUser({ id }: { id: string }) {
-  const { client } = await createServiceForHost();
-  const request = new DeleteUserRequest({
-    id,
-  });
-  await client.userService.deleteUser(request);
-}
-
-export async function updateUser({ 
-  userId, 
-  firstName, 
-  lastName, 
-  email 
-}: { 
-  userId: string;
-  firstName?: string;
-  lastName?: string;
-  email?: string;
-}) {
-  const { client } = await createServiceForHost();
-  const request = new UpdateUserRequest({
-    id: userId,
-    firstName,
-    lastName,
-    email,
-  });
-  await client.userService.updateUser(request);
-}
 
 export async function passwordReset({
   serviceUrl,

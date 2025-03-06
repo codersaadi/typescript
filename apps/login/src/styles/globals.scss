@@ -1,5 +1,6 @@
 // include styles from the ui package
 @use "./vars.scss";
+@use "./theme-variables.scss";
 
 @tailwind base;
 @tailwind components;
