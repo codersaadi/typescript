@@ -50,6 +50,16 @@ export async function registerUser(command: RegisterUserCommand) {
     return { error: "Could not create user" };
   }
 
+  // Notify about the new user registration
+  const { notifyUserRegistration } = await import('./notification');
+  await notifyUserRegistration({
+    userId: addResponse.userId,
+    email: command.email,
+    firstName: command.firstName,
+    lastName: command.lastName,
+    isIdpRegistration: false,
+  });
+
   const loginSettings = await getLoginSettings({
     serviceUrl,
 

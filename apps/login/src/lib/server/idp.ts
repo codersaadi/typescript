@@ -83,6 +83,17 @@ export async function createNewSessionFromIdpIntent(
     return { error: "User not found in the system" };
   }
 
+  // Notify about the IDP-based registration
+  const { notifyUserRegistration } = await import('./notification');
+  await notifyUserRegistration({
+    userId: command.userId,
+    email: userResponse.user.details?.emailAddress || '',
+    firstName: userResponse.user.human?.profile?.firstName,
+    lastName: userResponse.user.human?.profile?.lastName,
+    isIdpRegistration: true,
+    idpId: command.idpIntent.idpIntentId,
+  });
+
   const loginSettings = await getLoginSettings({
     serviceUrl,
 
